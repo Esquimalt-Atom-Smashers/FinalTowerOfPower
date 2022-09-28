@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 
 /**
  * This class contains the Robot's subsystems, commands, and button mappings.
@@ -20,6 +21,7 @@ public class RobotContainer {
   // Subsystems
   private final DriveSubsystem drive = new DriveSubsystem();
   private final ClimberSubsystem climber = new ClimberSubsystem();
+  private final IntakeSubsystem intake = new IntakeSubsystem();
 
   // Controllers
   private final XboxController driverController = new XboxController(1);
@@ -42,6 +44,13 @@ public class RobotContainer {
           otherController.getPOV() == 180 ? 0.1 : 0
       )
     , climber));
+
+    // Setup default command for Intake Subsystem
+    intake.setDefaultCommand(new RunCommand(() -> 
+      intake.setIntakeSpeed(
+        driverController.getRightBumper() ? 0 : driverController.getRightTriggerAxis() * -0.6
+      )
+    , intake));
   }
 
   /**
