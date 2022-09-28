@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 
 /**
@@ -16,20 +17,36 @@ public class RobotContainer {
 
   public static final int DRIVER_CONTROLLER_PORT = 1;
 
+  // Subsystems
   private final DriveSubsystem drive = new DriveSubsystem();
+  private final ClimberSubsystem climber = new ClimberSubsystem();
+
+  // Controllers
   private final XboxController driverController = new XboxController(1);
+  private final XboxController otherController = new XboxController(0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
 
+    // Setup default command for Drive Subsystem
     drive.setDefaultCommand(new RunCommand(() -> 
       drive.move(driverController.getLeftX(), driverController.getRightY())
     , drive));
+
+    // Setup default command for Climber Subsystem
+    climber.setDefaultCommand(new RunCommand(() -> 
+      climber.setMotor(
+        otherController.getPOV() == 0 ? -0.1 : 
+          otherController.getPOV() == 180 ? 0.1 : 0
+      )
+    , climber));
   }
 
   /**
+   * one day we should switch to this
+   * 
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
