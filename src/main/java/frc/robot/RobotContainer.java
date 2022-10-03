@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ShootingSubsystem;
 
 /**
  * This class contains the Robot's subsystems, commands, and button mappings.
@@ -22,6 +23,7 @@ public class RobotContainer {
   private final DriveSubsystem drive = new DriveSubsystem();
   private final ClimberSubsystem climber = new ClimberSubsystem();
   private final IntakeSubsystem intake = new IntakeSubsystem();
+  private final ShootingSubsystem shooting = new ShootingSubsystem();
 
   // Controllers
   private final XboxController driverController = new XboxController(1);
