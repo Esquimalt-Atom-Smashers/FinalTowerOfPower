@@ -36,7 +36,7 @@ public class RobotContainer {
 
     // Setup default command for Drive Subsystem
     drive.setDefaultCommand(new RunCommand(() -> 
-      drive.move(driverController.getLeftX(), driverController.getRightY())
+      drive.move(driverController.getRawAxis(3), driverController.getLeftX())
     , drive));
 
     // Setup default command for Climber Subsystem
@@ -48,11 +48,11 @@ public class RobotContainer {
     , climber));
 
     // Setup default command for Intake Subsystem
-    intake.setDefaultCommand(new RunCommand(() -> 
-      intake.setIntakeSpeed(
-        driverController.getRightBumper() ? 0 : driverController.getRightTriggerAxis() * -0.6
-      )
-    , intake));
+    // intake.setDefaultCommand(new RunCommand(() -> 
+    //   intake.setIntakeSpeed(
+    //     driverController.getRightBumper() ? 0 : driverController.getRightTriggerAxis() * -0.6
+    //   )
+    // , intake));
   }
 
   /**

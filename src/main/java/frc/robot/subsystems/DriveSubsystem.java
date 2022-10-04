@@ -24,7 +24,8 @@ public class DriveSubsystem extends SubsystemBase {
      * @param rotation   the amount the robot will rotate
      */
     public void move(double moveAmount, double rotation) {
-        robotDrive.arcadeDrive(moveAmount, rotation);
+        // This is weird because the robot is built wrong
+        robotDrive.arcadeDrive(rotation, -moveAmount);
     }
 
 }
